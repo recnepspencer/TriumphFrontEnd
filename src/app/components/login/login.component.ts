@@ -2,38 +2,53 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '@auth0/auth0-angular';
 import { IonicModule } from '@ionic/angular';
 import { SharedModule } from '../shared/shared.module';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
   standalone: true,
-  imports: [IonicModule,
-    SharedModule]
-  
+  imports: [IonicModule, SharedModule]
 })
 export class LoginComponent implements OnInit {
+  constructor(public auth: AuthService, private router: Router) { }
 
-  constructor(private auth: AuthService) { }
-
-  ngOnInit() {}
+  ngOnInit() {
+    // Check initial login state
+    this.auth.isAuthenticated$.subscribe({
+      next: (isLoggedIn) => {
+        console.log('Initial login state:', isLoggedIn);
+        if (isLoggedIn) {
+          // Redirect to the home page or a protected page if logged in
+          this.router.navigate(['/']);
+        }
+      },
+      error: (err) => console.error('Error checking initial authentication status:', err)
+    });
+  }
 
   onSubmit() {
-    this.auth.loginWithRedirect().subscribe({
-      next: () => console.log('Logged in'),
-      error: (err) => console.log('Something went wrong: ', err)
+    this.auth.loginWithRedirect({
+      authorizationParams: {
+        prompt: 'login',
+      },
+    }).subscribe({
+      next: () => this.auth.handleRedirectCallback(),
     });
-    console.log('Login');
   }
+
   onLogout() {
-    this.auth.logout().subscribe({
-      next: () => console.log('Logged out'),
-      error: (err) => console.log('Something went wrong: ', err)
+    this.auth.logout()
+  }
+
+  onIsLoggedIn() {
+    // Check and log the authentication state
+    this.auth.isAuthenticated$.subscribe({
+      next: (isLoggedIn) => {
+        console.log('Is logged in:', isLoggedIn);
+      },
+      error: (err) => console.error('Error checking authentication status:', err)
     });
   }
-  onGetToken(){
-    this.auth.idTokenClaims$.subscribe((data) => {
-      console.log(data);
-    }
-  )}
 }
