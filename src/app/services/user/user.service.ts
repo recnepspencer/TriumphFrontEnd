@@ -1,8 +1,5 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { AuthService } from '@auth0/auth0-angular';
-import { Observable, from } from 'rxjs';
-import { mergeMap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 import { ApiService } from '../api.service';
 
 @Injectable({
@@ -16,10 +13,10 @@ export class UserService {
 
 
   index(): Observable<any> {
-    return this.apiService.index('users');
+    return this.apiService.index(this.uri);
   }
 
   show(id: string): Observable<any> {
-    return this.apiService.show('users', id);
+    return this.apiService.show(this.uri, id);
   }
 }
