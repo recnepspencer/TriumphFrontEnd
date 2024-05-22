@@ -21,7 +21,7 @@ bootstrapApplication(AppComponent, {
       domain: 'dev-6jjjgfzu0zoja45d.us.auth0.com',
       clientId: 'iNd0Rz04k83uUITFgfRKG5bU53dUDKGr',
       authorizationParams:{
-        redirect_uri: 'http://localhost:4200/login-page',
+        redirect_uri: 'http://localhost:4200/login-page'
       },
       cacheLocation: 'localstorage',
       useRefreshTokens: true
