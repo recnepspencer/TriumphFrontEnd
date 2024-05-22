@@ -9,16 +9,17 @@ import { ApiService } from '../api.service';
   providedIn: 'root'
 })
 export class UserService {
+  uri: string = 'users'
   constructor(
     private apiService: ApiService
   ) { }
 
 
   index(): Observable<any> {
-    return this.apiService.index('user');
+    return this.apiService.index('users');
   }
 
   show(id: string): Observable<any> {
-    return this.apiService.show('user', id);
+    return this.apiService.show('users', id);
   }
 }

@@ -8,8 +8,24 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <ion-item>
-    <button (click)="onLoadUsers()">Test Users</button>
-   </ion-item>
+  <ion-list>
+    <!-- <ion-item (click)="" -->
+    <ion-item (click)="onLoadUsers()" button>
+      Get All Users
+    </ion-item>
+
+  </ion-list>
+
+  <ion-list>
+    @for(user of users; track $index) {
+      <ion-item (click)="onGetUser(user._id)"  button>
+        <ion-label>
+          {{user._id}}
+          <h2>Get {{ user.username }} - {{ user.email}}</h2>
+        </ion-label>
+      </ion-item>
+    }
+
+  </ion-list>
 </ion-content>
 

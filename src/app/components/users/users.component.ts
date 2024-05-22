@@ -10,6 +10,7 @@ import { SharedModule } from '../shared/shared.module';
   styleUrls: ['./users.component.scss'],
 })
 export class UsersComponent  implements OnInit {
+  users: any;
 
   constructor(
     private userService: UserService
@@ -19,15 +20,23 @@ export class UsersComponent  implements OnInit {
 
   loadusers(): void {
     this.userService.index().subscribe((data) => {
-      console.log(data);
+      this.users = data;
+      console.log(this.users);
     });
-  }
-
-  test() {
-    console.log('test');
   }
 
   onLoadUsers(){
     this.loadusers();
+  }
+
+  getUser(id: any){
+    this.userService.show(id).subscribe((data) => {
+      console.log(data);
+    });
+  }
+
+  onGetUser(id: any){
+    console.log(id);
+    this.getUser(id);
   }
 }
