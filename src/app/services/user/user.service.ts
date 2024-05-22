@@ -16,10 +16,10 @@ export class UserService {
 
 
   index(): Observable<any> {
-    return this.apiService.index('users');
+    return this.apiService.index(this.uri);
   }
 
   show(id: string): Observable<any> {
-    return this.apiService.show('users', id);
+    return this.apiService.show(this.uri, id);
   }
 }
