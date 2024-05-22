@@ -24,8 +24,9 @@ export class NavigationComponent  implements OnInit {
 
   public appPages = [
     { title: 'Dashboard', url: 'dashboard', icon: 'home-outline' },
-    { title: 'Profile', url: 'profile', src: 'assets/custom-icons/profile.svg' },
+    { title: 'Profile', url: 'profile', src: 'assets/navigation-icons/profile.svg' },
     { title: 'Users', url: 'users', icon: 'grid-outline' },
+
   ]
 
   constructor(
