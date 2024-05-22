@@ -1,3 +1,9 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+  @if( currentLayout === 'fullscreen' && isLoaded) {
+    <app-full-screen></app-full-screen>
+  }
+  @else if( currentLayout === 'navigation' && isLoaded){
+    <app-navigation></app-navigation>
+  }
 </ion-app>
+

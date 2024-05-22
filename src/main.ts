@@ -1,6 +1,6 @@
 import { enableProdMode, importProvidersFrom } from '@angular/core';
 import { bootstrapApplication } from '@angular/platform-browser';
-import { RouteReuseStrategy, provideRouter } from '@angular/router';
+import { RouteReuseStrategy, provideRouter, PreloadAllModules, withPreloading, withComponentInputBinding } from '@angular/router';
 import { IonicRouteStrategy, provideIonicAngular } from '@ionic/angular/standalone';
 import { routes } from './app/app.routes';
 import { AppComponent } from './app/app.component';
@@ -15,8 +15,8 @@ if (environment.production) {
 bootstrapApplication(AppComponent, {
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    provideIonicAngular(),
-    provideRouter(routes),
+    provideIonicAngular({ mode: 'ios'}),
+    provideRouter(routes,  withComponentInputBinding(), withPreloading(PreloadAllModules)),
     importProvidersFrom(AuthModule.forRoot({
       domain: 'dev-6jjjgfzu0zoja45d.us.auth0.com',
       clientId: 'iNd0Rz04k83uUITFgfRKG5bU53dUDKGr',
@@ -26,7 +26,7 @@ bootstrapApplication(AppComponent, {
       cacheLocation: 'localstorage',
       useRefreshTokens: true
     })),
-  
+
 
     HttpClientModule,
     provideHttpClient()
