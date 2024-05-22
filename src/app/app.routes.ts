@@ -25,13 +25,14 @@ export const routes: Routes = [
           import('./routes/dashboard.routes').then(m => m.DASHBOARD_ROUTES),
       },
       {
-        path: 'test',
+        path: 'profile',
         loadChildren: () =>
-          import('./routes/test.routes').then(m => m.TEST_ROUTES),
+          import('./routes/profile.routes').then(m => m.PROFILE_ROUTES),
       },
       {
-        path: 'profile',
-        component: ProfileComponent
+        path: 'users',
+        loadChildren: () =>
+          import('./routes/users.routes').then(m => m.USER_ROUTES),
       }
     ]
   }

@@ -5,6 +5,7 @@ import { LayoutService } from './services/layout.service';
 import { NavigationEnd, Router } from '@angular/router';
 import { FullScreenComponent } from './components/layouts/full-screen/full-screen.component';
 import { NavigationComponent } from './components/layouts/navigation/navigation.component';
+import { AuthService } from '@auth0/auth0-angular';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -17,7 +18,12 @@ export class AppComponent {
 
   isLoaded = false;
 
-  constructor(private layoutService: LayoutService, private router: Router, public environmentInjector: EnvironmentInjector) {
+  constructor(
+    private layoutService: LayoutService,
+    private router: Router,
+    public environmentInjector: EnvironmentInjector,
+    private auth: AuthService
+  ) {
     this.router.events.pipe(
       filter((event): event is NavigationEnd => event instanceof NavigationEnd)
     ).subscribe((event: NavigationEnd) => {

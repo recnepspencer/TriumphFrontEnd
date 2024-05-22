@@ -15,13 +15,22 @@ export class LoginComponent implements OnInit {
   constructor(public auth: AuthService, private router: Router) { }
 
   ngOnInit() {
-    // Check initial login state
+
+
     this.auth.isAuthenticated$.subscribe({
       next: (isLoggedIn) => {
         console.log('Initial login state:', isLoggedIn);
         if (isLoggedIn) {
           // Redirect to the home page or a protected page if logged in
-          this.router.navigate(['/']);
+          this.router.navigate(['/dashboard']);
+        } else {
+          this.auth.loginWithRedirect({
+            authorizationParams: {
+              prompt: 'login',
+            },
+          }).subscribe({
+            next: () => this.auth.handleRedirectCallback(),
+          });
         }
       },
       error: (err) => console.error('Error checking initial authentication status:', err)
