@@ -26,7 +26,7 @@ export class NavigationComponent  implements OnInit {
     { title: 'Dashboard', url: 'dashboard', icon: 'home-outline' },
     { title: 'Profile', url: 'profile', src: 'assets/navigation-icons/profile.svg' },
     { title: 'Users', url: 'users', icon: 'grid-outline' },
-
+    { title: 'Fields', url: 'fields', icon: 'grid-outline' }
   ]
 
   constructor(

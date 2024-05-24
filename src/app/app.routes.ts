@@ -25,6 +25,11 @@ export const routes: Routes = [
           import('./routes/dashboard.routes').then(m => m.DASHBOARD_ROUTES),
       },
       {
+        path: 'fields',
+        loadChildren: () =>
+          import('./routes/fields.routes').then(m => m.FIELDS_ROUTES),
+      },
+      {
         path: 'profile',
         loadChildren: () =>
           import('./routes/profile.routes').then(m => m.PROFILE_ROUTES),
