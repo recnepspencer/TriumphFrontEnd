@@ -6,7 +6,7 @@ import { ApiService } from '../api.service';
   providedIn: 'root'
 })
 export class UserService {
-  uri: string = 'users'
+  uri: string = 'user'
   constructor(
     private apiService: ApiService
   ) { }
@@ -18,5 +18,9 @@ export class UserService {
 
   show(id: string): Observable<any> {
     return this.apiService.show(this.uri, id);
+  }
+
+  create(data: any): Observable<any> {
+    return this.apiService.create(this.uri, data);
   }
 }

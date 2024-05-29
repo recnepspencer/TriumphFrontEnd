@@ -22,7 +22,11 @@ export class ProfileComponent  implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log(this.user$.subscribe(
+      (data) => console.log(data)
+    ));
+  }
 
   onDisplayDetails(){
     this.code$.subscribe({

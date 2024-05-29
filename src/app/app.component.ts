@@ -45,7 +45,6 @@ export class AppComponent {
     this.isLoaded = true;
   }
 
-
   ngOnDestroy() {
     this.layoutSub.unsubscribe();
   }
