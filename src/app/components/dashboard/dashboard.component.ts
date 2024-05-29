@@ -10,12 +10,13 @@ import { UserService } from 'src/app/services/user/user.service';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
 })
-export class DashboardComponent  implements OnInit {
+export class DashboardComponent implements OnInit {
   user$ = this.auth.user$;
   user: any;
+
   constructor(
     private auth: AuthService,
-    private usersService: UserService
+    private userService: UserService
   ) { }
 
   ngOnInit() {
@@ -25,25 +26,32 @@ export class DashboardComponent  implements OnInit {
   setUserInfo() {
     this.user$.subscribe(
       (data) => {
-        this.user = data;
-        this.createUser();
+        if (data) {
+          this.user = data;
+          this.checkOrCreateUser();
+        }
       }
     );
-    // this.createUser();
   }
 
-  createUser() {
+  checkOrCreateUser() {
     const sendObj = {
       email: this.user.email,
       username: this.user.name,
       auth0Id: this.user.sub
     };
 
-    this.usersService.create(sendObj).subscribe(
-      (data) => {
-        console.log(data);
+    this.userService.checkUserExists(sendObj.username, sendObj.email, sendObj.auth0Id).subscribe({
+      next: (response) => {
+        if (response.isNewUser) {
+          console.log('User created:', response.user);
+        } else {
+          console.log('User data:', response.user);
+        }
+      },
+      error: (error) => {
+        console.error('Error checking or creating user:', error);
       }
-    );
+    });
   }
-
 }
