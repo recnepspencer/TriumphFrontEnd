@@ -42,16 +42,20 @@ export class DashboardComponent implements OnInit {
     };
 
     this.userService.checkUserExists(sendObj.username, sendObj.email, sendObj.auth0Id).subscribe({
-      next: (response) => {
-        if (response.isNewUser) {
-          console.log('User created:', response.user);
-        } else {
-          console.log('User data:', response.user);
-        }
-      },
-      error: (error) => {
-        console.error('Error checking or creating user:', error);
-      }
+      next: this.checkOrCreateUserNext.bind(this),
+      error: this.checkOrCreateUserError.bind(this)
     });
+  }
+
+  checkOrCreateUserNext(response: any) {
+    if (response.isNewUser) {
+      console.log('User created:', response.user);
+    } else {
+      console.log('User data:', response.user);
+    }
+  }
+
+  checkOrCreateUserError(error: any) {
+    console.error('Error checking or creating user:', error);
   }
 }
