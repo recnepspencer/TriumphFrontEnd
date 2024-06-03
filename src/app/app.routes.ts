@@ -30,6 +30,11 @@ export const routes: Routes = [
           import('./routes/fields.routes').then(m => m.FIELDS_ROUTES),
       },
       {
+        path: 'organizations',
+        loadChildren: () =>
+          import('./routes/organizations.routes').then(m => m.ORGANIZATION_ROUTES),
+      },
+      {
         path: 'profile',
         loadChildren: () =>
           import('./routes/profile.routes').then(m => m.PROFILE_ROUTES),
