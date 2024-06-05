@@ -1,3 +1,23 @@
-<p>
-  show works!
-</p>
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/organizations"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Organization Details</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="organization">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>{{ organization.name }}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p>Owner ID: {{ organization.owner_id }}</p>
+      <p>User IDs:</p>
+      <ul>
+        <li *ngFor="let userId of organization.user_ids">{{ userId }}</li>
+      </ul>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
