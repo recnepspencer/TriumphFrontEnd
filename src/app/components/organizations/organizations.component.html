@@ -1,0 +1,24 @@
+
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Organizations</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="onCreate()">
+        <ion-icon slot="icon-only" name="add-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+
+</ion-header>
+<ion-content>
+  <ion-list>
+    @for(organization of organizations; track $index) {
+      <ion-item button (click)="onOrganization(organization._id)">
+        <ion-label>{{organization.name}}</ion-label>
+      </ion-item>
+    }
+  </ion-list>
+</ion-content>

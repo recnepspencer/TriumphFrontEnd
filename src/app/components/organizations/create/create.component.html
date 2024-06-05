@@ -1,0 +1,34 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/organizations"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Create</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="onCreateOrganization()">
+        Save
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+
+</ion-header>
+@if(users.length > 0) {
+  <ion-content>
+    <form [formGroup]="organizationForm">
+      <ion-list>
+        <ion-item>
+          <ion-label position="stacked">Name</ion-label>
+          <ion-input type="text" formControlName="name"/>
+        </ion-item>
+        <ion-item>
+          <ion-select label="Owner" label-placement="stacked" formControlName="owner_id" interface="action-sheet">
+            @for(user of users; track $index) {
+              <ion-select-option [value]="user._id">{{user.username}}</ion-select-option>
+            }
+          </ion-select>
+        </ion-item>
+      </ion-list>
+    </form>
+  </ion-content>
+}
+

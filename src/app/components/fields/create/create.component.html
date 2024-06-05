@@ -1,0 +1,46 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/fields"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Create</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="onCreateField()">
+        <ion-icon slot="icon-only" name="add-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+
+</ion-header>
+<ion-content>
+  <form [formGroup]="newField">
+    <ion-list>
+      <ion-item>
+        <ion-label>Name</ion-label>
+        <ion-input type="text" formControlName="name"/>
+      </ion-item>
+      <ion-item>
+        <ion-label>Crop</ion-label>
+        <ion-select formControlName="crop">
+          @for(crop of crops; track $index) {
+            <ion-select-option [value]="crop.id">{{crop.name}}</ion-select-option>
+          }
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label>Location</ion-label>
+        <ion-input type="text" formControlName="location"/>
+      </ion-item>
+      <ion-item>
+        <ion-label>Irrigation</ion-label>
+        <ion-select formControlName="irrigationType">
+          @for(irrigation of irrigationTypes; track $index) {
+            <ion-select-option [value]="irrigation.id">{{irrigation.name}}</ion-select-option>
+          }
+        </ion-select>
+      </ion-item>
+    </ion-list>
+
+  </form>
+</ion-content>
+

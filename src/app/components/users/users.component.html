@@ -1,0 +1,31 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+
+    <ion-title>Users</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-list>
+    <!-- <ion-item (click)="" -->
+    <ion-item (click)="onLoadUsers()" button>
+      Get All Users
+    </ion-item>
+
+  </ion-list>
+
+  <ion-list>
+    @for(user of users; track $index) {
+      <ion-item (click)="onGetUser(user._id)"  button>
+        <ion-label>
+          {{user._id}}
+          <h2>Get {{ user.username }} - {{ user.email}}</h2>
+        </ion-label>
+      </ion-item>
+    }
+
+  </ion-list>
+</ion-content>
+

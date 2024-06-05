@@ -1,17 +1,16 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
 import { ApiService } from '../api.service';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
-  uri: string = 'user'
-  authUri: string = 'check-user'
+export class OrganizationsService {
+  uri = 'organization';
+
   constructor(
     private apiService: ApiService
   ) { }
-
 
   index(): Observable<any> {
     return this.apiService.index(this.uri);
@@ -24,10 +23,4 @@ export class UserService {
   create(data: any): Observable<any> {
     return this.apiService.create(this.uri, data);
   }
-
-  checkUserExists(username: string, email: string, auth0Id: string): Observable<any> {
-    const data = { username, email, auth0Id };
-    return this.apiService.create(this.authUri, data);
-  }
-  
 }
