@@ -12,8 +12,8 @@ import { addIcons } from 'ionicons';
   templateUrl: './fields.component.html',
   styleUrls: ['./fields.component.scss'],
 })
-export class FieldsComponent  implements OnInit {
-  fields: any = []
+export class FieldsComponent implements OnInit {
+  fields: any = [];
 
   addOutline = addOutline;
 
@@ -29,7 +29,7 @@ export class FieldsComponent  implements OnInit {
   }
 
   getFields() {
-    this.fieldsService.index().subscribe( {
+    this.fieldsService.index().subscribe({
       next: this.getFieldsNext.bind(this),
       error: this.getFieldsError.bind(this)
     });
@@ -37,7 +37,7 @@ export class FieldsComponent  implements OnInit {
 
   getField(id: string) {
     this.fieldsService.show(id).subscribe((data) => {
-
+      // Handle single field fetch
     });
   }
 
@@ -46,6 +46,7 @@ export class FieldsComponent  implements OnInit {
   }
 
   getFieldsError() {
+    // Handle error
   }
 
   onCreate() {

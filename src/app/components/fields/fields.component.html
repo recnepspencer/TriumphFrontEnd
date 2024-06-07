@@ -1,4 +1,3 @@
-
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-buttons slot="start">
@@ -11,14 +10,22 @@
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
-
 </ion-header>
+
 <ion-content>
-  <ion-list>
-    @for(field of fields; track $index) {
-      <ion-item button>
-        <ion-label>{{field.name}}</ion-label>
-      </ion-item>
-    }
-  </ion-list>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="6" *ngFor="let field of fields">
+        <ion-card class="field-card">
+          <ion-card-header>
+            <ion-card-title>{{ field.name }}</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <img src="assets/icon/wheat-icon.png" alt="Wheat Icon" class="wheat-icon"/>
+            <p>{{ field.crop.name }}</p>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
