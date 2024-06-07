@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { ApiService } from '../api.service';
 
 @Injectable({
@@ -27,7 +27,14 @@ export class UserService {
 
   checkUserExists(username: string, email: string, auth0Id: string): Observable<any> {
     const data = { username, email, auth0Id };
-    return this.apiService.create(this.authUri, data);
+    return this.apiService.create(this.authUri, data).pipe(
+      tap(response => {
+        if (response.token) {
+          localStorage.setItem('token', response.token);
+        }
+      })
+    );
   }
-  
+
 }
+

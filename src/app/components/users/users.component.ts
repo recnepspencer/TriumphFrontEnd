@@ -30,6 +30,7 @@ export class UsersComponent  implements OnInit {
   }
 
   getUser(id: any){
+    console.log(id);
     this.userService.show(id).subscribe((data) => {
       console.log(data);
     });
