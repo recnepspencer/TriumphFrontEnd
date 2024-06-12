@@ -4,47 +4,36 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { addOutline } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
 import { FieldsService } from 'src/app/services/fields/fields.service';
+import { IrrigationService } from 'src/app/services/irrigation/irrigation.service';
+import { CropService } from 'src/app/services/crop/crop.service';
+
 
 @Component({
   selector: 'app-create',
   standalone: true,
-  imports: [SharedModule],
+  imports: [SharedModule,],
   templateUrl: './create.component.html',
   styleUrls: ['./create.component.scss'],
 })
-export class CreateComponent  implements OnInit {
+export class CreateComponent implements OnInit {
   addOutline = addOutline;
   newField: FormGroup = new FormGroup({});
-
-  crops = [
-    {
-      id: "664caf594058d1d23e19d1c8",
-      name: "Sugar Beets",
-      waterRequirement: 2
-    },
-    {
-      id: "664cb387d5f5ff9b1aded839",
-      name: "Wheat",
-      waterRequirement: 2
-    }
-  ]
-
-  irrigationTypes = [
-    {
-      id: "664bee39b81268c3e3bfe1b4",
-      name: "handline"
-    }
-  ]
+  crops: any[] = [];
+  irrigationTypes: any[] = [];
 
   constructor(
     private formBuilder: FormBuilder,
-    private fieldsService: FieldsService
+    private fieldsService: FieldsService,
+    private irrigationService: IrrigationService,
+    private cropService: CropService
   ) {
     addIcons({ addOutline });
   }
 
   ngOnInit() {
     this.createForm();
+    this.loadCrops();
+    this.loadIrrigationTypes();
   }
 
   createForm() {
@@ -56,11 +45,45 @@ export class CreateComponent  implements OnInit {
     });
   }
 
-  onCreateField() {
-    // console.log(this.newField.value);
-    this.fieldsService.create(this.newField.value).subscribe((data) => {
-      console.log(data);
-    });
+  loadCrops() {
+    this.cropService.index().subscribe(
+      (data) => {
+        this.crops = data;
+      },
+      (error) => {
+        console.error('Error loading crops:', error);
+      }
+    );
   }
 
+  loadIrrigationTypes() {
+    this.irrigationService.index().subscribe(
+      (data) => {
+        this.irrigationTypes = data.map((irrigation: any) => ({
+          id: irrigation._id,
+          name: irrigation.type
+        }));
+      },
+      (error) => {
+        console.error('Error loading irrigation types:', error);
+      }
+    );
+  }
+
+  onOptionSelected(controlName: string, option: any) {
+    this.newField.controls[controlName].setValue(option.id);
+  }
+
+  onCreateField() {
+    if (this.newField.valid) {
+      this.fieldsService.create(this.newField.value).subscribe(
+        (data) => {
+          console.log(data);
+        },
+        (error) => {
+          console.error('Error creating field:', error);
+        }
+      );
+    }
+  }
 }
