@@ -2,27 +2,40 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AuthService } from '@auth0/auth0-angular';
 import { Observable, from } from 'rxjs';
-import { mergeMap } from 'rxjs/operators';
+import { switchMap } from 'rxjs/operators';
+import { UserStateService } from './user/user-state.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
-  url = 'http://localhost:3000';
+  private url = 'http://localhost:3000';
 
-  constructor(private http: HttpClient, private authService: AuthService) { }
+  constructor(
+    private http: HttpClient,
+    private authService: AuthService,
+    private userStateService: UserStateService
+  ) { }
 
   private getAccessToken(): Observable<string> {
     return from(this.authService.getAccessTokenSilently());
   }
 
   private createHeaders(token: string): HttpHeaders {
-    return new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    let headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
+    const userId = this.userStateService.getUserId();
+    console.log(userId);
+    if (userId) {
+      headers = headers.set('User-ID', userId);
+    }
+
+    return headers;
   }
 
   create<T>(uri: string, body: any): Observable<T> {
     return this.getAccessToken().pipe(
-      mergeMap(token => {
+      switchMap(token => {
         const headers = this.createHeaders(token);
         return this.http.post<T>(`${this.url}/${uri}`, body, { headers });
       })
@@ -31,7 +44,7 @@ export class ApiService {
 
   index<T>(uri: string): Observable<T> {
     return this.getAccessToken().pipe(
-      mergeMap(token => {
+      switchMap(token => {
         const headers = this.createHeaders(token);
         return this.http.get<T>(`${this.url}/${uri}`, { headers });
       })
@@ -40,7 +53,7 @@ export class ApiService {
 
   show<T>(uri: string, id: string): Observable<T> {
     return this.getAccessToken().pipe(
-      mergeMap(token => {
+      switchMap(token => {
         const headers = this.createHeaders(token);
         return this.http.get<T>(`${this.url}/${uri}/${id}`, { headers });
       })
@@ -49,7 +62,7 @@ export class ApiService {
 
   update<T>(uri: string, id: string, body: any): Observable<T> {
     return this.getAccessToken().pipe(
-      mergeMap(token => {
+      switchMap(token => {
         const headers = this.createHeaders(token);
         return this.http.put<T>(`${this.url}/${uri}/${id}`, body, { headers });
       })
@@ -58,7 +71,7 @@ export class ApiService {
 
   delete<T>(uri: string, id: string): Observable<T> {
     return this.getAccessToken().pipe(
-      mergeMap(token => {
+      switchMap(token => {
         const headers = this.createHeaders(token);
         return this.http.delete<T>(`${this.url}/${uri}/${id}`, { headers });
       })

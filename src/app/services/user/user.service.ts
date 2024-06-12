@@ -1,17 +1,19 @@
 import { Injectable } from '@angular/core';
 import { Observable, tap } from 'rxjs';
 import { ApiService } from '../api.service';
+import { UserStateService } from './user-state.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  uri: string = 'user'
-  authUri: string = 'check-user'
-  constructor(
-    private apiService: ApiService
-  ) { }
+  uri: string = 'user';
+  authUri: string = 'check-user';
 
+  constructor(
+    private apiService: ApiService,
+    private userStateService: UserStateService
+  ) { }
 
   index(): Observable<any> {
     return this.apiService.index(this.uri);
@@ -29,12 +31,9 @@ export class UserService {
     const data = { username, email, auth0Id };
     return this.apiService.create(this.authUri, data).pipe(
       tap(response => {
-        if (response.token) {
-          localStorage.setItem('token', response.token);
-        }
+        this.userStateService.setUserId(response.user._id);
       })
     );
   }
-
 }
 
