@@ -44,8 +44,8 @@ export class CreateComponent  implements OnInit {
   createOrganization() {
     const sendObj = {
       name: this.organizationForm.value.name,
-      owner_id: this.organizationForm.value.owner_id,
-      user_ids: this.organizationForm.value.user_ids
+      // owner_id: this.organizationForm.value.owner_id,
+      // user_ids: this.organizationForm.value.user_ids
     }
     this.organizationsService.create(sendObj).subscribe({
       next: this.createOrganizationNext.bind(this),

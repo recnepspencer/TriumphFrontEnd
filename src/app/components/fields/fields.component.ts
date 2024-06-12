@@ -12,10 +12,12 @@ import { addIcons } from 'ionicons';
   templateUrl: './fields.component.html',
   styleUrls: ['./fields.component.scss'],
 })
-export class FieldsComponent  implements OnInit {
-  fields: any = []
+export class FieldsComponent implements OnInit {
+  fields: any = [];
 
   addOutline = addOutline;
+
+  fieldsLoading: boolean = true;
 
   constructor(
     private fieldsService: FieldsService,
@@ -24,29 +26,55 @@ export class FieldsComponent  implements OnInit {
     addIcons({ addOutline });
   }
 
+
+
   ngOnInit() {
-    this.getFields();
+    console.log('ngOnInit');
   }
 
+  ionViewWillEnter() {
+    this.getFields();
+    console.log('ionViewWillEnter');
+  }
+
+  ionViewDidEnter() {
+    console.log('ionViewDidEnter');
+  }
+
+  ionViewWillLeave() {
+    console.log('ionViewWillLeave');
+  }
+
+  ionViewDidLeave() {
+    console.log('ionViewDidLeave');
+  }
+
+
+
   getFields() {
-    this.fieldsService.index().subscribe( {
+    this.fieldsLoading = true;
+    this.fieldsService.index().subscribe({
       next: this.getFieldsNext.bind(this),
       error: this.getFieldsError.bind(this)
     });
   }
 
-  getField(id: string) {
-    this.fieldsService.show(id).subscribe((data) => {
-
-    });
-  }
-
   getFieldsNext(data: any) {
     this.fields = data;
+    this.fieldsLoading = false;
   }
 
   getFieldsError() {
+    // Handle error
+    this.fieldsLoading = false;
   }
+
+  getField(id: string) {
+    this.fieldsService.show(id).subscribe((data) => {
+      // Handle single field fetch
+    });
+  }
+
 
   onCreate() {
     this.router.navigate(['fields/create']);
