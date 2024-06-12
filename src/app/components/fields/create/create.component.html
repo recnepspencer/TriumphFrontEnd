@@ -35,9 +35,11 @@
         <ion-label>Irrigation</ion-label>
         <ion-select formControlName="irrigationType">
           @for(irrigation of irrigationTypes; track $index) {
-            <ion-select-option [value]="irrigation.id">{{irrigation.name}}</ion-select-option>
+            <ion-select-option [value]="irrigation.id">{{irrigation.name}}
+            </ion-select-option>
           }
         </ion-select>
+
       </ion-item>
     </ion-list>
 
