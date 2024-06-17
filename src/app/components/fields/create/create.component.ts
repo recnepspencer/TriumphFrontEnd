@@ -6,12 +6,12 @@ import { addIcons } from 'ionicons';
 import { FieldsService } from 'src/app/services/fields/fields.service';
 import { IrrigationService } from 'src/app/services/irrigation/irrigation.service';
 import { CropService } from 'src/app/services/crop/crop.service';
-
-
+import { ModalController } from '@ionic/angular';
+import { IrrigationModalComponent } from './irrigation-modal/irrigation-modal.component';
 @Component({
   selector: 'app-create',
   standalone: true,
-  imports: [SharedModule,],
+  imports: [SharedModule],
   templateUrl: './create.component.html',
   styleUrls: ['./create.component.scss'],
 })
@@ -20,12 +20,16 @@ export class CreateComponent implements OnInit {
   newField: FormGroup = new FormGroup({});
   crops: any[] = [];
   irrigationTypes: any[] = [];
+  selectedIrrigationType: any;
+
+  handlineIcon: string = 'assets/irrigation-icons/handline-icon.png';
 
   constructor(
     private formBuilder: FormBuilder,
     private fieldsService: FieldsService,
     private irrigationService: IrrigationService,
-    private cropService: CropService
+    private cropService: CropService,
+    private modalController: ModalController
   ) {
     addIcons({ addOutline });
   }
@@ -61,7 +65,8 @@ export class CreateComponent implements OnInit {
       (data) => {
         this.irrigationTypes = data.map((irrigation: any) => ({
           id: irrigation._id,
-          name: irrigation.type
+          name: irrigation.type,
+          imagePath: irrigation.imagePath,
         }));
       },
       (error) => {
@@ -70,8 +75,26 @@ export class CreateComponent implements OnInit {
     );
   }
 
-  onOptionSelected(controlName: string, option: any) {
-    this.newField.controls[controlName].setValue(option.id);
+  async openIrrigationTypeModal() {
+    const modal = await this.modalController.create({
+      component: IrrigationModalComponent,
+      componentProps: {
+        irrigationTypes: this.irrigationTypes,
+      }
+    });
+
+    modal.onDidDismiss().then((data) => {
+      if (data.data) {
+        this.selectIrrigationType(data.data);
+      }
+    });
+
+    await modal.present();
+  }
+
+  selectIrrigationType(irrigationType: any) {
+    this.selectedIrrigationType = irrigationType;
+    this.newField.controls['irrigationType'].setValue(irrigationType.id);
   }
 
   onCreateField() {
