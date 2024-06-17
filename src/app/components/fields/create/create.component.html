@@ -17,26 +17,51 @@
     <ion-list class="create-list">
       <ion-item class="create-item">
         <ion-label class="create-label">Name</ion-label>
-        <ion-input class="create-input" type="text" formControlName="name"></ion-input>
+        <ion-input
+          class="create-input"
+          type="text"
+          formControlName="name"
+        ></ion-input>
       </ion-item>
       <ion-item class="create-item">
         <ion-label class="create-label">Crop</ion-label>
         <ion-select class="create-select" formControlName="crop">
-          <ion-select-option class="create-option" *ngFor="let crop of crops" [value]="crop.id">
+          <ion-select-option
+            class="create-option"
+            *ngFor="let crop of crops"
+            [value]="crop.id"
+          >
             {{ crop.name }}
           </ion-select-option>
         </ion-select>
       </ion-item>
       <ion-item class="create-item">
         <ion-label class="create-label">Location</ion-label>
-        <ion-input class="create-input" type="text" formControlName="location"></ion-input>
+        <ion-input
+          class="create-input"
+          type="text"
+          formControlName="location"
+        ></ion-input>
       </ion-item>
-      <ion-item class="create-item irrigation-select">
-        <ion-label class="create-label irrigation-label">Irrigation</ion-label>
-        <button class="create-button" expand="full" (click)="openIrrigationTypeModal()">
-          Select Type
-        </button>
-        <ion-input class="create-input" type="text" [value]="selectedIrrigationType?.name" readonly></ion-input>
+      <ion-item class="create-item ">
+        <div class="irrigation-select">
+          <ion-label class="create-label irrigation-label"
+            >Irrigation</ion-label
+          >
+          <button
+            class="create-button"
+            expand="full"
+            (click)="openIrrigationTypeModal()"
+          >
+            Select Type
+          </button>
+          <ion-input
+            class="create-input"
+            type="text"
+            [value]="selectedIrrigationType?.name"
+            readonly
+          ></ion-input>
+        </div>
       </ion-item>
     </ion-list>
   </form>
