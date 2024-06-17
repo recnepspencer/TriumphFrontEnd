@@ -17,6 +17,8 @@ export class FieldsComponent implements OnInit {
 
   addOutline = addOutline;
 
+  fieldsLoading: boolean = true;
+
   constructor(
     private fieldsService: FieldsService,
     private router: Router
@@ -24,15 +26,47 @@ export class FieldsComponent implements OnInit {
     addIcons({ addOutline });
   }
 
+
+
   ngOnInit() {
-    this.getFields();
+    console.log('ngOnInit');
   }
 
+  ionViewWillEnter() {
+    this.getFields();
+    console.log('ionViewWillEnter');
+  }
+
+  ionViewDidEnter() {
+    console.log('ionViewDidEnter');
+  }
+
+  ionViewWillLeave() {
+    console.log('ionViewWillLeave');
+  }
+
+  ionViewDidLeave() {
+    console.log('ionViewDidLeave');
+  }
+
+
+
   getFields() {
+    this.fieldsLoading = true;
     this.fieldsService.index().subscribe({
       next: this.getFieldsNext.bind(this),
       error: this.getFieldsError.bind(this)
     });
+  }
+
+  getFieldsNext(data: any) {
+    this.fields = data;
+    this.fieldsLoading = false;
+  }
+
+  getFieldsError() {
+    // Handle error
+    this.fieldsLoading = false;
   }
 
   getField(id: string) {
@@ -41,13 +75,6 @@ export class FieldsComponent implements OnInit {
     });
   }
 
-  getFieldsNext(data: any) {
-    this.fields = data;
-  }
-
-  getFieldsError() {
-    // Handle error
-  }
 
   onCreate() {
     this.router.navigate(['fields/create']);
