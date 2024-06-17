@@ -1,0 +1,57 @@
+.create-content {
+    padding: 16px;
+    font-size: 1.1em;
+  }
+  
+  .create-form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .create-list {
+    margin-top: 16px;
+  }
+  
+  .create-item {
+    --padding-start: 12px;
+    --inner-padding-end: 12px;
+    margin-bottom: 16px;
+    font-size: 1.4em;
+    padding: 10px;
+  }
+  
+  .create-label {
+    font-size: 1.2em;
+    font-weight: bold;
+  }
+  
+  .create-input,
+  .create-select,
+  .create-button {
+    font-size: 1.2em;
+  }
+
+  .create-button{
+    width: fit-content;
+    padding: 6px;
+    font-size: 1.2em;
+    text-wrap: nowrap;
+    background-color: rgb(59, 144, 255);
+    color: rgb(255, 255, 255);
+    border-radius: 5px;
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+  
+  .create-option {
+    font-size: 1.2em;
+  }
+  
+  .irrigation-select{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .irrigation-label{
+    display: block;
+  }

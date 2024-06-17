@@ -1,0 +1,32 @@
+img.icon {
+    background-color: white;
+    padding: 8px;
+    width: 100px; /* Adjust the size as needed */
+    height: 100px; /* Adjust the size as needed */
+    cursor: pointer;
+    border-radius: 10px;
+
+  }
+  
+  ion-item.irrigation-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    font-size: 40px;
+
+  }
+  
+  ion-label.irrigation-label {
+    font-size: 1.8em; /* Adjust the size as needed */
+    text-wrap: nowrap;
+    text-align: center;
+  }
+
+  .irrigation-container{
+    display: flex;
+    margin: 10px;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%
+  }
