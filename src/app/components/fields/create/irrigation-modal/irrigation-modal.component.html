@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Select Irrigation Type</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()">Close</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-list>
+    <ion-item
+      *ngFor="let irrigation of irrigationTypes"
+      (click)="selectIrrigationType(irrigation)"
+    >
+      <div class="irrigation-container">
+        <img [src]="irrigation.imagePath" slot="start" class="icon" />
+        <ion-label class="irrigation-label">{{ irrigation.name }}</ion-label>
+      </div>
+    </ion-item>
+  </ion-list>
+</ion-content>
