@@ -27,6 +27,10 @@ export class UserService {
     return this.apiService.create(this.uri, data);
   }
 
+  update(id: string, data: any): Observable<any> {
+    return this.apiService.update(this.uri, id, data);
+  }
+
   checkUserExists(username: string, email: string, auth0Id: string): Observable<any> {
     const data = { username, email, auth0Id };
     return this.apiService.create(this.authUri, data).pipe(

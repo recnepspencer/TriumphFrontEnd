@@ -64,6 +64,7 @@ import { Component, OnInit } from '@angular/core';
 import { SharedModule } from '../shared/shared.module';
 import { AuthService } from '@auth0/auth0-angular';
 import { UserService } from 'src/app/services/user/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -76,9 +77,12 @@ export class DashboardComponent implements OnInit {
   user$ = this.auth.user$;
   user: any;
 
+  userChecked: boolean = false;
+
   constructor(
     private auth: AuthService,
-    private userService: UserService
+    private userService: UserService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -90,7 +94,10 @@ export class DashboardComponent implements OnInit {
       (data) => {
         if (data) {
           this.user = data;
-          this.checkOrCreateUser();
+          if (!this.userChecked) {
+            this.userChecked = true;
+            this.checkOrCreateUser();
+          }
         }
       }
     );
@@ -110,8 +117,8 @@ export class DashboardComponent implements OnInit {
   }
 
   checkOrCreateUserNext(response: any) {
-    if (response.isNewUser) {
-      console.log('User created:', response);
+    if (response.newUser) {
+      this.router.navigate([`/users/new-user`, { 'user-id': response.user._id }]);
     } else {
       console.log('User data:', response);
     }
