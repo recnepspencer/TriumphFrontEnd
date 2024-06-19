@@ -51,16 +51,22 @@ export class CreateComponent implements OnInit {
 
   loadCrops() {
     this.cropService.index().subscribe(
-      (data) => {
-        this.crops = data.map((crop: any) => ({
-          id: crop._id, // Ensure you use the ObjectId
-          name: crop.name.trim() // Trim any extra spaces from the crop name
-        }));
-      },
-      (error) => {
-        console.error('Error loading crops:', error);
+      {
+        next: this.loadCropsNext.bind(this),
+        error: this.loadCropsError.bind(this)
       }
     );
+  }
+
+  loadCropsNext(data: any) {
+    this.crops = data.map((crop: any) => ({
+      id: crop._id,
+      name: crop.name.trim()
+    }));
+  }
+
+  loadCropsError(error: any) {
+    console.error('Error loading crops:', error);
   }
 
   loadIrrigationTypes() {
