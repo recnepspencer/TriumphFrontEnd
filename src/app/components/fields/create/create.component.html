@@ -43,26 +43,19 @@
           formControlName="location"
         ></ion-input>
       </ion-item>
-      <ion-item class="create-item ">
-        <div class="irrigation-select">
-          <ion-label class="create-label irrigation-label"
-            >Irrigation</ion-label
-          >
-          <button
-            class="create-button"
-            expand="full"
-            (click)="openIrrigationTypeModal()"
-          >
-            Select Type
-          </button>
+      <div class="irrigation-select" (click)="openIrrigationTypeModal()">
+        <ion-item class="create-item">
+          <ion-label class="create-label irrigation-label">Irrigation</ion-label>
           <ion-input
             class="create-input"
             type="text"
+            placeholder="Select irrigation type"
             [value]="selectedIrrigationType?.name"
             readonly
-          ></ion-input>
-        </div>
-      </ion-item>
+            slot="end">
+          </ion-input>
+        </ion-item>
+      </div>
     </ion-list>
   </form>
 </ion-content>

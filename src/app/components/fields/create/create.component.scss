@@ -2,29 +2,21 @@
     padding: 16px;
     font-size: 1.1em;
   }
-  
+
   .create-form {
     display: flex;
     flex-direction: column;
   }
-  
+
   .create-list {
     margin-top: 16px;
   }
-  
-  .create-item {
-    --padding-start: 12px;
-    --inner-padding-end: 12px;
-    margin-bottom: 16px;
-    font-size: 1.4em;
-    padding: 10px;
-  }
-  
+
   .create-label {
     font-size: 1.2em;
     font-weight: bold;
   }
-  
+
   .create-input,
   .create-select,
   .create-button {
@@ -42,15 +34,17 @@
     margin-left: 20px;
     margin-right: 20px;
   }
-  
+
   .create-option {
     font-size: 1.2em;
   }
-  
-  .irrigation-select{
-    display: flex;
-    flex-direction: column;
-  }
+
+  // .irrigation-select{
+  //   display: flex;
+  //   justify-content: space-between;
+  //   align-items: center;
+  //   width: 100%;
+  // }
 
   .irrigation-label{
     display: block;
