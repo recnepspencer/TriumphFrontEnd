@@ -45,6 +45,31 @@ export class NavigationComponent  implements OnInit {
     this.setUserInfo();
   }
 
+  checkOrCreateUser() {
+    const sendObj = {
+      email: this.user.email,
+      username: this.user.name,
+      auth0Id: this.user.sub
+    };
+
+    this.userService.checkUserExists(sendObj.username, sendObj.email, sendObj.auth0Id).subscribe({
+      next: this.checkOrCreateUserNext.bind(this),
+      error: this.checkOrCreateUserError.bind(this)
+    });
+  }
+
+  checkOrCreateUserNext(response: any) {
+    if (response.newUser) {
+      this.router.navigate([`/users/new-user`, { 'user-id': response.user._id }]);
+    } else {
+      console.log('User data:', response);
+    }
+  }
+
+  checkOrCreateUserError(error: any) {
+    console.error('Error checking or creating user:', error);
+  }
+
   navigate(url: string, event: Event) {
     this.menu.close('menu').then(() => {
       this.router.navigate([url]);
@@ -75,28 +100,6 @@ export class NavigationComponent  implements OnInit {
     );
   }
 
-  checkOrCreateUser() {
-    const sendObj = {
-      email: this.user.email,
-      username: this.user.name,
-      auth0Id: this.user.sub
-    };
 
-    this.userService.checkUserExists(sendObj.username, sendObj.email, sendObj.auth0Id).subscribe({
-      next: this.checkOrCreateUserNext.bind(this),
-      error: this.checkOrCreateUserError.bind(this)
-    });
-  }
 
-  checkOrCreateUserNext(response: any) {
-    if (response.newUser) {
-      this.router.navigate([`/users/new-user`, { 'user-id': response.user._id }]);
-    } else {
-      console.log('User data:', response);
-    }
-  }
-
-  checkOrCreateUserError(error: any) {
-    console.error('Error checking or creating user:', error);
-  }
 }

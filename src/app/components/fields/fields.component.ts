@@ -26,8 +26,6 @@ export class FieldsComponent implements OnInit {
     addIcons({ addOutline });
   }
 
-
-
   ngOnInit() {
     console.log('ngOnInit');
   }
@@ -48,8 +46,6 @@ export class FieldsComponent implements OnInit {
   ionViewDidLeave() {
     console.log('ionViewDidLeave');
   }
-
-
 
   getFields() {
     this.fieldsLoading = true;
