@@ -52,7 +52,10 @@ export class CreateComponent implements OnInit {
   loadCrops() {
     this.cropService.index().subscribe(
       (data) => {
-        this.crops = data;
+        this.crops = data.map((crop: any) => ({
+          id: crop._id, // Ensure you use the ObjectId
+          name: crop.name.trim() // Trim any extra spaces from the crop name
+        }));
       },
       (error) => {
         console.error('Error loading crops:', error);
