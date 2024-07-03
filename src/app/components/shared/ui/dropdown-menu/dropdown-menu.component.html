@@ -1,0 +1,17 @@
+<div class="dropdown-container" [class.open]="dropdownOpen || selectedLabel">
+  <div class="dropdown-selected" (click)="toggleDropdown()">
+    <span class="dropdown-label" [class.active]="dropdownOpen || selectedLabel" [class.selected]="hasSelection()">
+      {{ defaultText }}
+    </span>
+    <div class="dropdown-value">{{ selectedLabel }}</div>
+  </div>
+  <div class="dropdown-options" *ngIf="dropdownOpen">
+    <div 
+      *ngFor="let item of items" 
+      class="dropdown-option" 
+      [class.selected]="item.value === selectedValue" 
+      (click)="selectItem(item)">
+      {{ item.label }}
+    </div>
+  </div>
+</div>

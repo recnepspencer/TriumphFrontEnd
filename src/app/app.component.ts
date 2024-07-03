@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, EnvironmentInjector, OnDestroy, OnInit } from '@angular/core';
-import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
+import { IonApp, IonRouterOutlet, IonToolbar } from '@ionic/angular/standalone';
 import { Subscription, filter } from 'rxjs';
 import { LayoutService } from './services/layout.service';
 import { NavigationEnd, Router } from '@angular/router';
@@ -10,7 +10,7 @@ import { AuthService } from '@auth0/auth0-angular';
   selector: 'app-root',
   templateUrl: 'app.component.html',
   standalone: true,
-  imports: [FullScreenComponent, NavigationComponent, IonApp, IonRouterOutlet],
+  imports: [IonToolbar, FullScreenComponent, NavigationComponent, IonApp, IonRouterOutlet],
 })
 export class AppComponent {
   currentLayout: string = 'default';

@@ -1,0 +1,92 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-segment [(ngModel)]="viewMode">
+      <ion-segment-button value="day">Day</ion-segment-button>
+      <ion-segment-button value="week">Week</ion-segment-button>
+      <ion-segment-button value="month">Month</ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="calendar-nav">
+    <ion-button (click)="prev()">
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </ion-button>
+    <ion-label>{{ getCurrentLabel() }}</ion-label>
+    <ion-button (click)="next()">
+      <ion-icon name="arrow-forward-outline"></ion-icon>
+    </ion-button>
+  </div>
+
+  <div [ngSwitch]="viewMode">
+    <div *ngSwitchCase="'day'">
+      <div class="day-view">
+        <div *ngFor="let time of dayView">
+          <div class="time-slot">{{ time.label }}</div>
+          <div class="tasks">
+            <div *ngFor="let task of time.tasks">{{ task.name }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngSwitchCase="'week'">
+      <div class="week-view">
+        <div class="day-column" *ngFor="let day of weekView">
+          <div class="day-label">{{ day.date | date: 'EEEE' }}</div>
+          <div class="tasks">
+            <div *ngFor="let task of day.tasks">{{ task.name }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngSwitchCase="'month'">
+      <div class="calendar-month">
+        <div class="calendar-week" *ngFor="let week of monthView">
+          <div 
+            class="calendar-day" 
+            *ngFor="let day of week" 
+            (click)="selectDay(day)"
+            [ngClass]="{'selected': isSelectedDay(day.date)}">
+            <div>{{ day.date | date: 'd' }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="task-section">
+    <div class="section-header">Today's Tasks</div>
+    <div *ngIf="selectedDayTasks.length > 0">
+      <div *ngFor="let task of selectedDayTasks" class="task-item todays-task">
+        <span>{{ task.name }}</span>
+        <input type="checkbox" [(ngModel)]="task.isCompleted" (change)="toggleTaskCompletion(task)">
+      </div>
+    </div>
+    <div *ngIf="selectedDayTasks.length === 0" class="no-tasks">
+      No tasks for today
+    </div>
+  </div>
+
+  <div class="task-section">
+    <div class="section-header">Upcoming Tasks</div>
+    <div *ngFor="let task of upcomingTasks" class="task-item upcoming-task">
+      <span>{{ task.name }}</span>
+      <input type="checkbox" [(ngModel)]="task.isCompleted" (change)="toggleTaskCompletion(task)">
+    </div>
+  </div>
+
+  <div class="task-section">
+    <div class="section-header">Past Tasks</div>
+    <div *ngFor="let task of pastTasks" class="task-item past-task">
+      <span>{{ task.name }}</span>
+      <input type="checkbox" [(ngModel)]="task.isCompleted" (change)="toggleTaskCompletion(task)">
+    </div>
+  </div>
+  <div class="extra-space"></div>
+
+  <button class="add-task" (click)="openAddTaskModal()">+</button>
+</ion-content>

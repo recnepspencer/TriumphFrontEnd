@@ -1,0 +1,127 @@
+.close {
+  background-color: var(--close-red);
+  border-radius: 5px;
+  color: #fff;
+}
+
+.add-task-header{
+  background-color: white;
+  text-align: center;
+  width: 100%;
+  font-size: 2em;
+  padding:1em;
+}
+
+
+.dropdown-wrapper {
+  width: 100%;
+}
+
+.dropdown-container {
+  position: relative;
+  width: 100%;
+  margin-bottom: 1rem;
+  cursor: pointer;
+  user-select: none;
+}
+
+.dropdown-selected {
+  padding: 0.75rem;
+  font-size: 1.25rem; /* Bigger text */
+  color: white;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.dropdown-options {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  border: 1px solid #ccc;
+  border-top: none;
+  background-color: #fff;
+  z-index: 1000;
+  max-height: 200px; /* Limit height and make it scrollable */
+  overflow-y: auto;
+  border-radius: 4px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+// .dropdown-option {
+//   padding: 0.75rem;
+//   font-size: 1.25rem; /* Bigger text */
+//   color: var(--darker-gray);
+//   background-color: #fff;
+//   cursor: pointer;
+// }
+
+
+
+
+.item-container {
+  background-color: white;
+  padding: 1em;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.form-group {
+  box-sizing: border-box;
+}
+
+.scheduled-time{
+  font-size: 1.5em;
+  color: var(--gold);
+  padding: 5px;
+  margin-bottom: 10px;
+}
+
+ion-datetime-button::part(native) {
+  color: var(--gold);
+  margin-top: 10px;
+  background-color: var(--white);
+  border: solid 1px var(--gold);
+  font-size: 1.5em;
+}
+
+.add-task-buttons{
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  gap: 20px;
+  button{
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1.5em;
+  }
+}
+
+
+.close-button{
+  border: 1px solid var(--close-red);
+  background-color: white;
+  color: var(--close-red);
+}
+
+.close-button:hover{
+  background-color: lightgray;
+}
+
+.close-button:active{
+  background-color: var(--close-red);
+  color: white;
+  border: 1px solid var(--close-red);
+}
+
+.add-button{
+  background-color: var(--gold);
+  color: white;
+}
+
+.add-button:hover, .add-button:active{
+  background-color: white;
+  color: var(--gold);
+  border: 1px solid var(--gold);
+}

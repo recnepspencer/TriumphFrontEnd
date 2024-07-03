@@ -1,0 +1,44 @@
+.input-box {
+    position: relative;
+    margin-bottom: 1rem;
+    width: 100%; /* Ensure it fills the container */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+  }
+  
+  .input-box input {
+    width: 100%; /* Ensure it fills the container */
+    padding: 1rem; /* Match padding of dropdown */
+    font-size: 1.25rem; /* Match font size of dropdown */
+    color: var(--darker-gray);
+    background-color: white;
+    border: 1px solid var(--gold); /* Ensure the border style is the same */
+    border-radius: 4px; /* Match border radius of dropdown */
+    outline: none;
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+    height: 3rem; /* Match height of dropdown */
+  }
+  
+  .input-box span {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.25em;
+    color: var(--gold);
+    text-transform: uppercase;
+    transition: 0.5s;
+    pointer-events: none;
+  }
+  
+  .input-box input:valid ~ span,
+  .input-box input:focus ~ span,
+  .input-box span.active {
+    color: var(--gold);
+    transform: translateX(10px) translateY(-30px); /* Match translate of dropdown */
+    font-size: 0.65em;
+    padding: 0 10px;
+    background: white;
+    border-left: solid 1px var(--gold);
+    border-right: solid 1px var(--gold);
+  }
+  

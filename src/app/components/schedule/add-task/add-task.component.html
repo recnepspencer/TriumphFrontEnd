@@ -1,0 +1,63 @@
+<div class="add-task-header">
+  Add A Task
+</div>
+<ion-content>
+  <form (ngSubmit)="addTask()">
+    <div class="form-group">
+      <div class="item-container">
+        <app-custom-input
+          label="Task Name"
+          id="taskName"
+          name="taskName"
+          [(ngModel)]="taskName"
+          [required]="true"
+        ></app-custom-input>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="item-container">
+        <div class="dropdown-wrapper">
+          <app-dropdown-menu
+            [items]="categoryOptions"
+            (selectionChange)="onCategoryChange($event)"
+            [defaultText]="'Select a Category'"
+          >
+          </app-dropdown-menu>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="item-container">
+        <div class="dropdown-wrapper">
+          <app-dropdown-menu
+            [items]="fieldOptions"
+            (selectionChange)="onFieldChange($event)"
+            [defaultText]="'Select a Field'"
+          >
+          </app-dropdown-menu>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="item-container">
+        <label for="scheduledTime" class="scheduled-time">Scheduled Time:</label>
+        <ion-datetime-button datetime="datetime"></ion-datetime-button>
+        <ion-modal [keepContentsMounted]="true">
+          <ng-template>
+            <ion-datetime
+              id="datetime"
+              presentation="date-time"
+              (ionChange)="updateScheduledTime($event.detail.value)"
+              [value]="scheduledTime.toISOString()"
+            >
+            </ion-datetime>
+          </ng-template>
+        </ion-modal>
+      </div>
+    </div>
+    <div class="add-task-buttons">
+      <button type="button" class="close-button" (click)="close()">X</button>
+      <button type="submit" class="add-button">Add Task</button>
+    </div>
+  </form>
+</ion-content>

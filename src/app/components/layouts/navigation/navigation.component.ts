@@ -2,8 +2,7 @@ import { Component, EnvironmentInjector, OnInit } from '@angular/core';
 import { SharedModule } from '../../shared/shared.module';
 import { Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
-
-import { gridOutline, homeOutline, logOutOutline } from 'ionicons/icons';
+import {personOutline, peopleOutline, gridOutline, homeOutline, logOutOutline, calendarClearOutline, radioButtonOffOutline } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
 import { AuthService } from '@auth0/auth0-angular';
 import { UserService } from 'src/app/services/user/user.service';
@@ -20,15 +19,20 @@ export class NavigationComponent  implements OnInit {
   iconsToAdd = {
     homeOutline,
     gridOutline,
-    logOutOutline
+    logOutOutline,
+    calendarClearOutline,
+    radioButtonOffOutline, 
+    personOutline,
+    peopleOutline
   }
 
   public appPages = [
     { title: 'Dashboard', url: 'dashboard', icon: 'home-outline' },
-    { title: 'Profile', url: 'profile', src: 'assets/navigation-icons/profile.svg' },
-    { title: 'Users', url: 'users', icon: 'grid-outline' },
-    { title: 'Fields', url: 'fields', icon: 'grid-outline' },
-    { title: 'Organizations', url: 'organizations', icon: 'grid-outline' },
+    { title: 'Profile', url: 'profile', src: 'assets/navigation-icons/person-outline.svg' },
+    { title: 'Users', url: 'users', icon: 'people-outline' },
+    { title: 'Fields', url: 'fields', icon: 'radio-button-off-outline' },
+    { title: 'Organizations', url: 'organizations', icon: 'people-outline' },
+    {title: 'Schedule', url: 'schedule', icon: 'calendar-clear-outline' },
   ]
 
   constructor(

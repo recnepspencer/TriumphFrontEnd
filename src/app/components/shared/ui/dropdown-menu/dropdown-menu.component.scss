@@ -1,0 +1,84 @@
+.dropdown-container {
+  position: relative;
+  width: 100%; /* Ensure it fills the container */
+  margin-bottom: 1rem;
+  border: 1px solid var(--gold); /* Ensure the border style is the same */
+  border-radius: 4px;
+  background-color: white;
+  cursor: pointer;
+  overflow: visible;
+  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+.dropdown-selected {
+  padding: 1rem; /* Match padding of input */
+  font-size: 1.25rem;
+  color: var(--darker-gray);
+  background-color: white;
+  border: 1px solid var(--gold);
+  border-radius: 4px;
+  height: 3rem; /* Match height of input */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+.dropdown-label {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1em;
+  color: var(--gold);
+  text-transform: uppercase;
+  transition: 0.5s;
+  pointer-events: none;
+}
+
+.dropdown-label.selected {
+  color: var(--darker-gray); /* Change to dark gray after selection */
+}
+
+.dropdown-label.active {
+  color: var(--gold);
+  transform: translateX(10px) translateY(-30px);
+  font-size: 0.65em;
+  padding: 0 10px;
+  background: white;
+  border-left: solid 1px var(--gold);
+  border-right: solid 1px var(--gold);
+}
+
+.dropdown-value {
+  color: var(--darker-gray);
+  padding-left: 10px;
+}
+
+.dropdown-options {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  border: 1px solid var(--lighter-gray);
+  border-top: none;
+  background-color: var(--darker-gray);
+  z-index: 1000;
+  max-height: 200px;
+  overflow-y: auto;
+  border-radius: 4px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-option {
+  padding: 0.75rem;
+  font-size: 1.25rem;
+  color: var(--gold);
+  background-color: var(--darker-gray);
+  cursor: pointer;
+}
+
+.dropdown-option:hover, .dropdown-option.selected {
+  background-color: var(--lighter-blue);
+  color: var(--darker-gray);
+}

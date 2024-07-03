@@ -1,0 +1,13 @@
+<div class="input-box">
+  <input
+    type="text"
+    [id]="id"
+    [(ngModel)]="value"
+    [name]="name"
+    [required]="required"
+    (focus)="onFocus()"
+    (blur)="onBlur()"
+    (input)="updateValue($event)"
+  />
+  <span [class.active]="isFocused || value">{{ label }}</span>
+</div>

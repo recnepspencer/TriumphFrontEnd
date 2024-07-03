@@ -34,7 +34,22 @@
 
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
-@import '@ionic/angular/css/palettes/dark.system.css';
+// @import '@ionic/angular/css/palettes/dark.system.css';
+
+
+
+:root{
+  --darker-blue: #0B26D4;
+  --med-brown: #94834B; 
+  --gold: #D4AF37;
+  --light-blue: #1F3DFF;
+  --lighter-gray: #544F40;
+  --darker-gray: #2D2D33;
+  --close-red: #D43745;
+  --valid-green: #37d331;
+
+  background-color: white;
+}
 
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -42,3 +57,5 @@ body {
   background-color: #f4f5f8; /* Light grey background */
   height: 100%;
 }
+
+
