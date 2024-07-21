@@ -1,0 +1,110 @@
+.field-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(to bottom, #D4AF37, #C9B984);
+    border-radius: 100%;
+    width: 20vw;
+    height: 20vw;
+    min-width: 200px;
+    min-height: 200px;
+    margin: 25px auto;
+    position: relative;
+    text-align: center;
+}
+
+.field-header h2 {
+    position: absolute;
+    top: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 0;
+    font-size: clamp(20px, 2vw, 200px);
+}
+
+.wheat-icon {
+    width: 5vw;
+    height: 5vw;
+    margin: 10px 0;
+    min-width: 50px;
+    min-height: 50px;
+}
+
+.field-header p {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 0;
+}
+
+.content-container {
+    background: linear-gradient(to bottom, #8A9AFF, #5C73FF); /* Slight blue gradient */
+    color: var(--darker-gray); /* Font color */
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.card {
+    padding: 10px 0;
+}
+
+.card-header {
+    background: none; /* No background */
+    padding: 0 10px;
+    text-align: left; /* Align text to the left */
+    margin-bottom: 10px; /* Reduced margin between titles */
+}
+
+.card-title {
+    font-size: 1.5em;
+    margin: 0;
+    font-weight: bold;
+}
+
+.card-content {
+    padding: 0 10px;
+    text-align: left; /* Align text to the left */
+}
+
+.card-content ul {
+    color: white;
+    font-size: 1em;
+}
+
+.card-content li {
+    font-size: 1.1em; /* Increase font size */
+    margin-bottom: 10px;
+}
+
+.tasks-content {
+    max-height: 200px; /* Adjust height as needed */
+    overflow-y: auto; /* Make scrollable */
+}
+
+.create-action-button {
+    width: 100%;
+    padding: 10px;
+    font-size: 1.1em;
+    background-color: var(--gold); /* Gold background color */
+    color: white; /* White text */
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    text-align: center; /* Center text */
+}
+
+.back-button {
+    background: none;
+    border: none;
+    color: var(--ion-color-primary);
+    font-size: 18px;
+    padding: 10px;
+    cursor: pointer;
+    margin-right: auto;
+  }
+  
+  .back-button:focus {
+    outline: none;
+  }

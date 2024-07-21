@@ -68,6 +68,7 @@ export class NavigationComponent  implements OnInit {
     } else {
       console.log('User data:', response);
     }
+    localStorage.setItem('user-id', JSON.stringify(response.user._id));
   }
 
   checkOrCreateUserError(error: any) {

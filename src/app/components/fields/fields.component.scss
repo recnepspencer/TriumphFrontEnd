@@ -1,48 +1,64 @@
 ion-content {
-    ion-grid {
-      ion-row {
-        ion-col {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          margin-bottom: 20px;
-          
-            ion-card {
-              background: linear-gradient(to bottom, #f5deb3, #98fb98); /* Light tan to light green gradient */
-              text-align: center;
-              padding: 20px;
-              border-radius: 100%;
-              box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-              width: 35vw;
-              height: 35vw;
-            
-            .wheat-icon {
-              width: 50px;
-              height: 50px;
-              margin: 10px 0;
-            }
-  
-            ion-card-title {
-              font-size: 1.2em;
-              margin-bottom: 10px;
-              color:black
-            }
-  
-            ion-card-content {
-              display: flex;
-              flex-direction: column;
-              justify-content: center;
-              align-items: center;
-  
-              p {
-                margin-top: 10px;
-                font-size: 1em;
-                color: #555;
-              }
+  ion-grid {
+    ion-row {
+      ion-col {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 20px;
+        flex-direction: column;
+        
+        ion-card {
+          background: linear-gradient(to bottom, #D4AF37, #C9B984);
+          text-align: center;
+          padding: 20px;
+          border-radius: 100%;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+          width: 40vw; /* Same width as .field-header */
+          height: 40vw; /* Same height as .field-header */
+          min-width: 160px;
+          min-height: 160px;
+          position: relative;
+
+          .wheat-icon {
+            width: 10vw;
+            height: 10vw;
+            margin: 10px 0;
+            min-width: 50px;
+            min-height: 50px;
+          }
+
+          ion-card-title {
+            position: absolute;
+            top: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: clamp(20px, 2vw, 200px);
+            margin: 0;
+            font-weight: 300;
+            color: black;
+          }
+
+          ion-card-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+
+            p {
+              position: absolute;
+              bottom: 10px;
+              left: 50%;
+              transform: translateX(-50%);
+              margin: 0;
+              font-size: 1em;
+              color: #555;
             }
           }
         }
       }
     }
   }
-  
+}

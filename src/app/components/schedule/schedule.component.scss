@@ -155,3 +155,80 @@
   color: var(--darker-gray);
   padding: 20px;
 }
+
+// Week view styles
+.week-view {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0;
+}
+
+.day-column {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #ccc;
+}
+
+.day-label {
+  font-weight: bold;
+  text-align: center;
+  font-size: 1em;
+  padding: 4px;
+  background-color: var(--light-blue);
+  color: white;
+}
+
+.tasks {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 8px;
+}
+
+.task-item {
+  font-size: 0.75em;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  border-bottom: 1px solid var(--lighter-gray);
+  padding: 4px;
+}
+
+// Day view styles
+.day-view {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+}
+
+.day-view-heading {
+  font-size: 1.5em;
+  font-weight: bold;
+  margin-bottom: 16px;
+  color: var(--darker-gray);
+  text-align: center;
+}
+
+.day-task {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px;
+  border-bottom: 1px solid var(--lighter-gray);
+  font-size: 1em;
+  color: var(--darker-gray);
+  background-color: white;
+  margin: 8px 0;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.day-task span {
+  flex: 1;
+}
+
+.day-task input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+}

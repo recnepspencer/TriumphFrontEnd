@@ -1,3 +1,50 @@
-<p>
-  field-details works!
-</p>
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+    <ion-button (click)="closeModal()">
+      <ion-icon name="chevron-back-outline"></ion-icon>
+    </ion-button>
+  </ion-buttons>
+    <ion-title>{{ field?.name }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="field">
+  <div class="field-details-container">
+    <div class="field-header">
+      <h2>{{ field.name }}</h2>
+      <img src="assets/icon/wheat-icon.png" alt="Wheat Icon" class="wheat-icon"/>
+      <p>{{ field.crop?.name }}</p>
+    </div>
+    <div class="content-container">
+  <div class="irrigation-card card">
+    <div class="card-header">
+      <h2 class="card-title">Irrigation Types</h2>
+    </div>
+    <div class="card-content">
+      <ul>
+        <li *ngFor="let irrigation of irrigationTypes">
+          {{ irrigation.type }}
+        </li>
+      </ul>
+      <p *ngIf="irrigationTypes.length === 0">No irrigation types available.</p>
+    </div>
+  </div>
+  <div class="tasks-card card">
+    <div class="card-header">
+      <h2 class="card-title">Tasks</h2>
+    </div>
+    <div class="card-content tasks-content">
+      <ul>
+        <li *ngFor="let task of tasks">
+          <p>{{ task.timeScheduled | date: 'MM/dd' }} - {{ task.name }} ({{ task.category }})</p>
+        </li>
+      </ul>
+      <p *ngIf="tasks.length === 0">No tasks available for this field.</p>
+    </div>
+  </div>
+  <button class="create-action-button">Create Action</button>
+</div>
+
+  </div>
+</ion-content>

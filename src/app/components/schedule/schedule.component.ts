@@ -3,7 +3,7 @@ import { ModalController } from '@ionic/angular';
 import { AddTaskComponent } from './add-task/add-task.component';
 import { ScheduleService } from 'src/app/services/schedule/schedule.service';
 import { SharedModule } from '../shared/shared.module';
-import { startOfMonth, endOfMonth, startOfWeek, endOfWeek, addDays, subMonths, addMonths, isSameDay, startOfDay, addMinutes } from 'date-fns';
+import { startOfMonth, endOfMonth, startOfWeek, endOfWeek, addDays, subMonths, addMonths, isSameDay, startOfDay, addMinutes, isToday, format } from 'date-fns';
 import { addIcons } from 'ionicons';
 import { arrowBackOutline, arrowForwardOutline } from 'ionicons/icons';
 
@@ -17,12 +17,11 @@ import { arrowBackOutline, arrowForwardOutline } from 'ionicons/icons';
 
 export class ScheduleComponent implements OnInit {
 
-
   iconsToAdd = {
     arrowBackOutline,
     arrowForwardOutline
   }
-  
+
   tasks: any[] = [];
   pastTasks: any[] = [];
   upcomingTasks: any[] = [];
@@ -33,6 +32,8 @@ export class ScheduleComponent implements OnInit {
   dayView: any[] = [];
   selectedDay: Date = new Date();
   selectedDayTasks: any[] = [];
+  isToday: any = isToday;
+  format: any = format;
 
   constructor(
     private modalController: ModalController,
@@ -155,16 +156,9 @@ export class ScheduleComponent implements OnInit {
   }
 
   generateDayView() {
-    const start = startOfDay(this.currentDate);
-    const times = [];
-    for (let i = 0; i < 48; i++) {
-      const time = addMinutes(start, i * 30);
-      times.push({
-        label: time.toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' }),
-        tasks: this.tasks.filter(task => isSameDay(new Date(task.timeScheduled), this.currentDate) && new Date(task.timeScheduled).getHours() === time.getHours() && new Date(task.timeScheduled).getMinutes() === time.getMinutes())
-      });
-    }
-    this.dayView = times;
+    this.selectedDayTasks = this.tasks.filter(task => 
+      isSameDay(new Date(task.timeScheduled), this.currentDate)
+    );
   }
 
   selectDay(day: any) {
@@ -174,5 +168,13 @@ export class ScheduleComponent implements OnInit {
 
   isSelectedDay(day: Date): boolean {
     return isSameDay(day, this.selectedDay);
+  }
+
+  getTaskHeader(): string {
+    if (isToday(this.selectedDay)) {
+      return "Today's Tasks";
+    } else {
+      return `${format(this.selectedDay, 'MMMM d')} Tasks`;
+    }
   }
 }

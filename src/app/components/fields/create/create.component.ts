@@ -8,19 +8,24 @@ import { IrrigationService } from 'src/app/services/irrigation/irrigation.servic
 import { CropService } from 'src/app/services/crop/crop.service';
 import { ModalController } from '@ionic/angular';
 import { IrrigationModalComponent } from './irrigation-modal/irrigation-modal.component';
+import { CustomInputComponent
+
+ } from '../../shared/ui/custom-input/custom-input.component';
 @Component({
   selector: 'app-create',
   standalone: true,
-  imports: [SharedModule],
+  imports: [SharedModule, CustomInputComponent],
   templateUrl: './create.component.html',
   styleUrls: ['./create.component.scss'],
 })
 export class CreateComponent implements OnInit {
   addOutline = addOutline;
   newField: FormGroup = new FormGroup({});
+  
   crops: any[] = [];
   irrigationTypes: any[] = [];
   selectedIrrigationType: any;
+  fieldName: string = ''
 
   handlineIcon: string = 'assets/irrigation-icons/handline-icon.png';
 

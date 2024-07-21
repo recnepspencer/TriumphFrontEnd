@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { SharedModule } from '../shared/shared.module';
-import { FieldsService } from 'src/app/services/fields/fields.service';
 import { Router } from '@angular/router';
-import { addOutline } from 'ionicons/icons';
+import { FieldsService } from 'src/app/services/fields/fields.service';
 import { addIcons } from 'ionicons';
+import { addOutline } from 'ionicons/icons';
+import { ModalController } from '@ionic/angular';
+import { FieldDetailsComponent } from './field-details/field-details.component';
+import { SharedModule } from '../shared/shared.module';
 
 @Component({
   selector: 'app-fields',
@@ -13,66 +15,51 @@ import { addIcons } from 'ionicons';
   styleUrls: ['./fields.component.scss'],
 })
 export class FieldsComponent implements OnInit {
-  fields: any = [];
+  fields: any[] = [];
+
+  fieldOptions: Array<{ value: string, label: string }> = [];
+
 
   addOutline = addOutline;
-
   fieldsLoading: boolean = true;
 
   constructor(
     private fieldsService: FieldsService,
-    private router: Router
+    private router: Router,
+    private modalController: ModalController
   ) {
     addIcons({ addOutline });
   }
 
   ngOnInit() {
-    console.log('ngOnInit');
+    this.loadFields();
   }
 
-  ionViewWillEnter() {
-    this.getFields();
-    console.log('ionViewWillEnter');
-  }
-
-  ionViewDidEnter() {
-    console.log('ionViewDidEnter');
-  }
-
-  ionViewWillLeave() {
-    console.log('ionViewWillLeave');
-  }
-
-  ionViewDidLeave() {
-    console.log('ionViewDidLeave');
-  }
-
-  getFields() {
-    this.fieldsLoading = true;
-    this.fieldsService.index().subscribe({
-      next: this.getFieldsNext.bind(this),
-      error: this.getFieldsError.bind(this)
+  
+  loadFields() {
+    this.fieldsService.index().subscribe(fields => {
+      this.fields = fields;
+      this.populateFieldOptions();
     });
   }
 
-  getFieldsNext(data: any) {
-    this.fields = data;
-    this.fieldsLoading = false;
+  populateFieldOptions() {
+    this.fieldOptions = this.fields.map(field => ({
+      value: field._id,
+      label: field.name
+    }));
   }
 
-  getFieldsError() {
-    // Handle error
-    this.fieldsLoading = false;
+  navigateToAddField() {
+    this.router.navigate(['/fields/create']);
   }
 
-  getField(id: string) {
-    this.fieldsService.show(id).subscribe((data) => {
-      // Handle single field fetch
+  async navigateToFieldDetails(field: any) {
+    console.log('Field being passed to modal:', field);
+    const modal = await this.modalController.create({
+      component: FieldDetailsComponent,
+      componentProps: { field: field }
     });
-  }
-
-
-  onCreate() {
-    this.router.navigate(['fields/create']);
+    return await modal.present();
   }
 }

@@ -5,8 +5,8 @@
     </ion-buttons>
     <ion-title>Fields</ion-title>
     <ion-buttons slot="end">
-      <ion-button (click)="onCreate()">
-        <ion-icon slot="icon-only" name="add-outline"></ion-icon>
+      <ion-button (click)="navigateToAddField()">
+        <ion-icon name="add-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
@@ -15,7 +15,7 @@
 <ion-content>
   <ion-grid>
     <ion-row>
-      <ion-col size="6" *ngFor="let field of fields">
+      <ion-col size="6" *ngFor="let field of fields" (click)="navigateToFieldDetails(field)">
         <ion-card class="field-card">
           <ion-card-header>
             <ion-card-title>{{ field.name }}</ion-card-title>

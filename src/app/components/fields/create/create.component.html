@@ -16,12 +16,13 @@
   <form [formGroup]="newField" class="create-form">
     <ion-list class="create-list">
       <ion-item class="create-item">
-        <ion-label class="create-label">Name</ion-label>
-        <ion-input
-          class="create-input"
-          type="text"
-          formControlName="name"
-        ></ion-input>
+        <app-custom-input
+          label="Field Name"
+          id="taskName"
+          name="taskName"
+          [(ngModel)]="fieldName"
+          [required]="true"
+        ></app-custom-input>
       </ion-item>
       <ion-item class="create-item">
         <ion-label class="create-label">Crop</ion-label>

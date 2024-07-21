@@ -14,7 +14,7 @@ export class ApiService {
   constructor(
     private http: HttpClient,
     private authService: AuthService,
-    private userStateService: UserStateService
+    private userStateService: UserStateService,
   ) { }
 
   private getAccessToken(): Observable<string> {
@@ -24,8 +24,12 @@ export class ApiService {
   private createHeaders(token: string): HttpHeaders {
     let headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
 
-    const userId = this.userStateService.getUserId();
-    console.log(userId);
+
+    let userId = localStorage.getItem('user-id');
+    if (userId) {
+      userId = JSON.parse(userId);
+    }
+
     if (userId) {
       headers = headers.set('User-ID', userId);
     }

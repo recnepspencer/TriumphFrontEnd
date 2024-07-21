@@ -25,14 +25,13 @@
   <div [ngSwitch]="viewMode">
     <div *ngSwitchCase="'day'">
       <div class="day-view">
-        <div *ngFor="let time of dayView">
-          <div class="time-slot">{{ time.label }}</div>
-          <div class="tasks">
-            <div *ngFor="let task of time.tasks">{{ task.name }}</div>
-          </div>
+        <h2 class="day-view-heading">{{ getCurrentLabel() }}</h2>
+        <div *ngFor="let task of selectedDayTasks" class="task-item day-task">
+          <span>{{ task.name }}</span>
+          <input type="checkbox" [(ngModel)]="task.isCompleted" (change)="toggleTaskCompletion(task)">
         </div>
       </div>
-    </div>
+    </div>  
     <div *ngSwitchCase="'week'">
       <div class="week-view">
         <div class="day-column" *ngFor="let day of weekView">
@@ -59,7 +58,7 @@
   </div>
 
   <div class="task-section">
-    <div class="section-header">Today's Tasks</div>
+    <div class="section-header">{{ getTaskHeader() }}</div>
     <div *ngIf="selectedDayTasks.length > 0">
       <div *ngFor="let task of selectedDayTasks" class="task-item todays-task">
         <span>{{ task.name }}</span>
@@ -67,7 +66,7 @@
       </div>
     </div>
     <div *ngIf="selectedDayTasks.length === 0" class="no-tasks">
-      No tasks for today
+      No tasks for {{ isToday(selectedDay) ? 'today' : format(selectedDay, 'MMMM d') }}
     </div>
   </div>
 

@@ -23,4 +23,12 @@ export class FieldsService {
   create(data: any): Observable<any> {
     return this.apiService.create(this.uri, data);
   }
+
+  update(id: string, data: any): Observable<any> {
+    return this.apiService.update(this.uri, id, data);
+  }
+
+  getIrrigationType(id: string): Observable<any> {
+    return this.apiService.show('irrigation', id);
+  }
 }
